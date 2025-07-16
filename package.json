@@ -1,0 +1,39 @@
+{
+  "name": "@virelia/qr-code",
+  "version": "0.1.0",
+  "description": "QR code component and utilities for Virelia",
+  "module": "index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "bun run build:types && bun build src/index.ts --outdir dist --target node",
+    "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist",
+    "dev": "bun --watch src/index.ts",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "qr-code",
+    "qr",
+    "react",
+    "typescript",
+    "virelia"
+  ],
+  "author": "Virelia",
+  "license": "MIT",
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^19.1.8"
+  },
+  "peerDependencies": {
+    "react": "^19.1.0",
+    "typescript": "^5.8.3"
+  }
+}
