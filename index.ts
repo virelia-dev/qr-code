@@ -1,1 +1,1 @@
-export * from "./src";
+export { QRCodeComponent } from "./src/index";

@@ -4,15 +4,15 @@
     "": {
       "name": "qr-code",
       "dependencies": {
-        "qrcode": "latest",
+        "qrcode": "^1.5.4",
       },
       "devDependencies": {
-        "@types/qrcode": "latest",
-        "@types/react": "latest",
+        "@types/qrcode": "^1.5.5",
+        "@types/react": "^19.1.8",
       },
       "peerDependencies": {
-        "react": "latest",
-        "typescript": "latest",
+        "react": "^19.1.0",
+        "typescript": "^5.8.3",
       },
     },
   },

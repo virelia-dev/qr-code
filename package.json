@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "QR code component and utilities for Virelia",
   "module": "index.ts",
+  "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
@@ -12,7 +13,7 @@
   ],
   "scripts": {
     "build": "bun run build:types && bun build src/index.ts --outdir dist --target node",
-    "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist",
+    "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist --noEmit false",
     "dev": "bun --watch src/index.ts",
     "clean": "rm -rf dist"
   },

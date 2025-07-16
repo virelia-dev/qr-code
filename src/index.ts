@@ -1,2 +1,6 @@
-export * from "./qr-code";
-export * from "./ui";
+export {
+  QRCodeComponent,
+  generateQRCodeBuffer,
+  generateQRCodeDataURL,
+} from "./qr-code";
+export { QRCodeWithActions } from "./ui";
