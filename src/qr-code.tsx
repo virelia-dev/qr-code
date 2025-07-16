@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import QRCode from "qrcode";
 
+console.log("QRCode import:", QRCode);
+
 export interface QRCodeProps {
   value: string;
   size?: number;
@@ -32,10 +34,22 @@ export function QRCodeComponent({
 
   useEffect(() => {
     const generateQR = async () => {
-      if (!canvasRef.current) return;
+      console.log("generateQR called, canvasRef.current:", canvasRef.current);
+      if (!canvasRef.current) {
+        console.log("No canvas ref, retrying in 100ms");
+        setTimeout(() => generateQR(), 100);
+        return;
+      }
 
+      console.log("Starting QR generation for value:", value);
+      console.log("QRCode object:", QRCode);
+      console.log("QRCode.toCanvas function:", QRCode.toCanvas);
       setIsLoading(true);
       try {
+        if (!QRCode || typeof QRCode.toCanvas !== "function") {
+          throw new Error("QRCode library not properly imported");
+        }
+
         await QRCode.toCanvas(canvasRef.current, value, {
           width: size,
           margin: 2,
@@ -44,16 +58,18 @@ export function QRCodeComponent({
             light: "#FFFFFF",
           },
         });
+        console.log("QR code generated successfully");
         onGenerated?.();
       } catch (error) {
         console.error("Error generating QR code:", error);
         onError?.(error as Error);
       } finally {
+        console.log("Setting isLoading to false");
         setIsLoading(false);
       }
     };
 
-    generateQR();
+    setTimeout(() => generateQR(), 10);
   }, [value, size, onGenerated, onError]);
 
   const downloadQR = () => {
@@ -106,7 +122,8 @@ export function QRCodeComponent({
     canvas: (
       <canvas
         ref={canvasRef}
-        className={`border rounded-lg ${isLoading ? "opacity-50" : ""} ${className}`}
+        className={`border rounded-lg ${isLoading ? "opacity-50" : ""
+          } ${className}`}
         style={{ width: size, height: size }}
       />
     ),
@@ -115,7 +132,7 @@ export function QRCodeComponent({
 
 export async function generateQRCodeDataURL(
   value: string,
-  options: QRCodeOptions = {},
+  options: QRCodeOptions = {}
 ): Promise<string> {
   return QRCode.toDataURL(value, {
     width: options.width || 200,
@@ -129,7 +146,7 @@ export async function generateQRCodeDataURL(
 
 export async function generateQRCodeBuffer(
   value: string,
-  options: QRCodeOptions = {},
+  options: QRCodeOptions = {}
 ): Promise<Buffer> {
   return QRCode.toBuffer(value, {
     width: options.width || 200,

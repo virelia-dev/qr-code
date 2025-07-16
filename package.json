@@ -1,6 +1,6 @@
 {
   "name": "@virelia/qr-code",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "QR code component and utilities for Virelia",
   "module": "index.ts",
   "private": false,
